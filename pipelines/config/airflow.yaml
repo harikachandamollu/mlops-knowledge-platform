@@ -1,0 +1,16 @@
+source: airflow
+
+base_url: https://airflow.apache.org
+
+documents:
+  - name: concepts
+    url: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/index.html
+
+  - name: dags
+    url: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html
+
+  - name: operators
+    url: https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html
+
+  - name: scheduling
+    url: https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/index.html
