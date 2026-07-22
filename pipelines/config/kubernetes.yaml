@@ -1,0 +1,12 @@
+source: kubernetes
+
+base_url: https://kubernetes.io
+
+seed_url: https://kubernetes.io/docs/home/
+
+allowed_paths:
+  - /docs/concepts/
+  - /docs/tasks/
+  - /docs/tutorials/
+
+max_pages: 100

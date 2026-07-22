@@ -7,6 +7,7 @@ from storage import save_raw, save_processed
 from metadata import update_metadata
 from utils import setup_logger, ensure_dir
 
+from crawler import crawl
 
 logger = setup_logger()
 
@@ -30,7 +31,8 @@ def run_pipeline(config_name: str):
     config = load_config(config_name)
 
     source = config["source"]
-    documents = config["documents"]
+   
+    urls = crawl(config)
 
     raw_path = RAW_DIR / source
     processed_path = PROCESSED_DIR / source
@@ -42,14 +44,16 @@ def run_pipeline(config_name: str):
     metadata_records = []
 
     logger.info(f"Starting ingestion for: {source}")
+    logger.info(
+        f"Found {len(urls)} documents"
+    )
 
-    for doc in documents:
+    for index, url in enumerate(urls):
 
-        name = doc["name"]
-        url = doc["url"]
+        name = f"{source}_{index}"
 
         try:
-            logger.info(f"Processing: {name}")
+            logger.info(f"Processing: {url}")
 
             html = download(url)
 
@@ -68,7 +72,7 @@ def run_pipeline(config_name: str):
             })
 
         except Exception as e:
-            logger.error(f"Failed {name}: {str(e)}")
+            logger.error(f"Failed {url}: {e}")
 
     update_metadata(METADATA_FILE, metadata_records)
 
@@ -77,3 +81,6 @@ def run_pipeline(config_name: str):
 
 if __name__ == "__main__":
     run_pipeline("airflow")
+    run_pipeline("kafka")
+    run_pipeline("kubernetes")
+    run_pipeline("mlflow")

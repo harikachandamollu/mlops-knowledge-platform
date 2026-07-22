@@ -1,0 +1,11 @@
+source: kafka
+
+base_url: https://kafka.apache.org
+
+seed_url: https://kafka.apache.org/documentation/
+
+allowed_paths:
+  - /documentation/
+  - /quickstart/
+
+max_pages: 100

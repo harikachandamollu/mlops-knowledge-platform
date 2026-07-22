@@ -1,0 +1,12 @@
+source: mlflow
+
+base_url: https://mlflow.org
+
+seed_url: https://mlflow.org/docs/latest/
+
+allowed_paths:
+  - /docs/latest/
+  - /docs/latest/ml/
+  - /docs/latest/models/
+
+max_pages: 100
